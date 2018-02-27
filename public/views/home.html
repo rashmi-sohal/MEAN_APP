@@ -1,0 +1,275 @@
+<!-- public/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+
+    <title>Starter Node and Angular</title>
+
+    <!-- CSS -->
+    <!-- <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="css/style.css"> <!-- custom styles --> 
+
+    <!-- JS -->
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular-route/angular-route.min.js"></script>
+
+    <!-- ANGULAR CUSTOM -->
+  
+    <script src="js/controllers/HomeCtrl.js"></script>
+    <script src="js/appRoutes.js"></script>
+    <script src="js/app.js"></script>
+
+
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-dropdown-multiselect/1.11.8/angularjs-dropdown-multiselect.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+</head>
+<body ng-app="sampleApp" ng-controller="HomeController">
+<div class="container">
+  <!-- <h2>Modal Example</h2> -->
+ 
+ 
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Book Your Hotel Here</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <h4>1. Review your booking</h4>
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Hotel Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="booking.hotelName" style="background-color: white;" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">No. of People:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="booking.nop" style="background-color: white;" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">No. of Rooms:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="booking.nor" style="background-color: white;" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">No. of days:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="booking.nod">
+                    </div>
+                </div>
+                <!-- <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Check-in Date:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="daterange" ng-model="booking.checkIn" style="background-color: white;" ng-disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Check-out Date:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="daterange" ng-model="booking.checkOut" style="background-color: white;" ng-disabled>
+                    </div>
+                </div> -->
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Amount Payable (Rs.):</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" ng-model="booking.amount" style="background-color: white;" readonly>
+                    </div>
+                </div>
+            </form>
+          </div>
+
+          <div>
+            <h4>2. Guest Details</h4>
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Guest Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputName" placeholder="Guest Name" ng-model="guest.name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Email:</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email Address" ng-model="guest.email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Mobile Number:</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="inputNumber" placeholder="Mobile Number" ng-model="guest.mobile">
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="dismissModal" data-dismiss="modal" ng-click="payNow(guest)">Pay Now</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+
+<div class="container">
+  <div class="page-header">
+    <h1>Welcome!!</h1>      
+  </div>
+  <form>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Location:</label>
+        <div class="col-sm-10">
+            <label>
+                <input type="radio" ng-model="selectHotel.location" value="Delhi">
+                Delhi
+            </label><br/>
+            <label>
+                <input type="radio" ng-model="selectHotel.location" value="Haryana">
+                Haryana
+            </label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Rating:</label>
+        <div class="col-sm-10">
+            <!-- <input type="text" class="form-control" ng-model="selectHotel.rating"> -->
+            <label>
+                <input type="radio" ng-model="selectHotel.rating" value="3">
+                3 star
+            </label><br/>
+            <label>
+                <input type="radio" ng-model="selectHotel.rating" value="4">
+                4 star
+            </label><br/>
+            <label>
+                <input type="radio" ng-model="selectHotel.rating" value="5">
+                5 star
+            </label>
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">No. of days:</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" ng-model="selectHotel.nod">
+        </div>
+    </div>
+   <!--  <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Check-in/Check-Out:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="daterange" ng-model="selectHotel.checkIn">
+        </div>
+    </div> -->
+    <!-- <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Check-out Date:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="daterange" ng-model="selectHotel.checkOut">
+        </div>
+    </div> -->
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">No. of People:</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" ng-model="selectHotel.nop">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">No. of rooms:</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" ng-model="selectHotel.nor">
+        </div>
+    </div>
+    <div style="margin-left: 50%;">
+      <button type="submit" class="btn btn-warning" ng-click="searchHotel()">Search Hotel</button>
+    </div>
+  </form>   
+
+  <div>
+</div>
+
+
+<div class="container" ng-show="showNoHotelList == true">
+  <div class="panel panel-default"  style="margin-top: 28px;">
+    <div class="panel-body">No Hotels Found..!!</div>
+  </div>
+</div>
+
+<div class="container" ng-show="showHotelList == true">
+  <div class="panel panel-default"  style="margin-top: 28px;font-family: initial;font-size: 20px;">
+    <div class="panel-body">Recommendations</div>
+  </div>
+  <div class="panel panel-default" ng-repeat="hotel in displayHotel track by $index">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-6">
+          <form>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Hotel Name:</label>
+                <label class="col-sm-2 col-form-label">{{ hotel.name }}</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Visit Hotel Page:</label>
+                <label class="col-sm-2 col-form-label">
+                  <a href="#!/hotel" target="_blank" ng-class="{ active: isActive('/hotel') }">{{ hotel.name }}</a>
+                </label>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Rating:</label>
+                <label class="col-sm-2 col-form-label">{{ hotel.rating }}</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Location:</label>
+                <label class="col-sm-2 col-form-label">{{ hotel.location }}</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Nightly Price:</label>
+                <label class="col-sm-2 col-form-label">{{ hotel.nightly_price }}</label>
+            </div>
+          </form>
+        </div>
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="viewHotel($index)" style="float:right">Book Now</button>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
+
+
+<script type="text/javascript">
+$('input[name="daterange"]').daterangepicker(
+    {
+        locale: {
+          format: 'YYYY-MM-DD'
+        },
+        startDate: '2013-01-01',
+        endDate: '2013-12-31'
+    }, 
+    function(start, end, label) {
+        alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+    });
+</script>
